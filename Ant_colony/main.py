@@ -31,10 +31,10 @@ colores_disponibles = [
 colores_aristas = {(i, j): colores_disponibles[i % len(colores_disponibles)] for i, j, attrs in edges}
 
 # Parámetros del algoritmo
-n_ants = 5
-n_best = 1
-n_iterations = 100
-decay = 0.6
+n_ants = 5  # Número de hormigas que se utilizarán en cada iteración del algoritmo.
+n_best = 1  # Cuántas de las mejores soluciones encontradas se utilizarán para actualizar las feromonas.
+n_iterations = 1000  # Número total de iteraciones que realizará el algoritmo.
+decay = 0.6  # Tasa de evaporación de feromona después de cada iteración. Un valor entre 0 y 1 indica qué fracción de la feromona existente se mantendrá.
 
 # Crea una instancia de AntColony y ejecuta el algoritmo
 ant_colony = AntColony(graph, n_ants, n_best, n_iterations, decay)
