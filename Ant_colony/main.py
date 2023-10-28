@@ -1,11 +1,21 @@
+import random
 import networkx as nx
 from ant_colony import AntColony
 from visualizer import plot_graph, plot_results
 
+# Número de nodos en el grafo
+num_nodos = 7
+
 # Crea un grafo de ejemplo con nodos y aristas
 graph = nx.Graph()
-graph.add_nodes_from(range(1, 6))
-edges = [(1, 2, {'weight': 2}), (2, 3, {'weight': 3}), (3, 4, {'weight': 1}), (4, 5, {'weight': 4}), (5, 1, {'weight': 5})]
+graph.add_nodes_from(range(1, num_nodos + 1))
+
+# Función para generar aristas aleatorias con pesos entre 1 y 10
+def generar_aristas(num_nodos):
+    return [(i, j, {'weight': random.randint(1, 10)}) for i in range(1, num_nodos + 1) for j in range(i + 1, num_nodos + 1)]
+
+# Agrega aristas aleatorias al grafo con pesos entre 1 y 10
+edges = generar_aristas(num_nodos)
 graph.add_edges_from(edges)
 nx.set_edge_attributes(graph, 1.0, 'pheromone')  # Inicializa todas las aristas con feromona 1.0
 
@@ -21,4 +31,4 @@ best_path, best_cost = ant_colony.run()
 
 # Visualiza el grafo con feromonas y la mejor ruta encontrada
 plot_graph(graph)
-plot_results(best_path, best_cost)
+plot_results(best_path, best_cost, graph)
