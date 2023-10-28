@@ -4,7 +4,7 @@ from ant_colony import AntColony
 from visualizer import plot_graph, plot_results
 
 # Número de nodos en el grafo
-num_nodos = 5
+num_nodos = 6
 
 # Crea un grafo de ejemplo con nodos y aristas
 graph = nx.Graph()
@@ -19,8 +19,16 @@ edges = generar_aristas(num_nodos)
 graph.add_edges_from(edges)
 nx.set_edge_attributes(graph, 1.0, 'pheromone')  # Inicializa todas las aristas con feromona 1.0
 
-# Define colores para las aristas basándose en los nodos de origen
-colores_aristas = {(i, j): 'red' if i == 1 else 'blue' if i == 2 else 'green' for i, j, attrs in edges}
+# Define una lista de colores disponibles
+colores_disponibles = [
+    'red', 'blue', 'green', 'orange', 'purple', 'pink', 'yellow', 'brown',
+    'cyan', 'magenta', 'lime', 'teal', 'indigo', 'violet', 'gold', 'silver',
+    'crimson', 'navy', 'olive', 'turquoise', 'orchid', 'salmon', 'sienna',
+    'darkred', 'darkgreen', 'darkblue', 'darkorange', 'darkviolet', 'darkcyan'
+]
+
+# Define colores para las aristas basándote en los nodos de origen
+colores_aristas = {(i, j): colores_disponibles[i % len(colores_disponibles)] for i, j, attrs in edges}
 
 # Parámetros del algoritmo
 n_ants = 5
