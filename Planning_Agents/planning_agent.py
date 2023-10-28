@@ -15,7 +15,8 @@ class Node:
         # Método para comparar nodos basado en la suma de costos y heurísticas
         return (self.cost + self.heuristic) < (other.cost + other.heuristic)
 
-def astar_search(initial_state, goal_state, heuristic_func):
+# Algoritmo de búsqueda A*
+def astar_search(initial_state, goal_state, heuristic_func): # como entrada el estado inicial, el estado objetivo y una función heurística
     open_list = []  # Lista de nodos por explorar
     heapq.heappush(open_list, Node(initial_state, None, None, 0, heuristic_func(initial_state, goal_state)))
     closed_set = set()  # Conjunto de nodos explorados
@@ -25,7 +26,7 @@ def astar_search(initial_state, goal_state, heuristic_func):
 
         if current_node.state == goal_state:
             path = []
-            while current_node:
+            while current_node: # continuará hasta que open_list esté vacía, lo que significa que todos los nodos posibles han sido explorados o que se encontró una solución.
                 # Reconstructa el camino desde el nodo objetivo hasta el nodo inicial
                 path.append((current_node.state, current_node.action))
                 current_node = current_node.parent
@@ -50,7 +51,7 @@ def manhattan_distance(state, goal_state):
 
 # Ejemplo de uso
 initial_state = (0, 0)  # Estado inicial del agente
-goal_state = (3, 3)  # Estado objetivo al que el agente debe llegar
+goal_state = (2, 3)  # Estado objetivo al que el agente debe llegar
 path = astar_search(initial_state, goal_state, manhattan_distance)  # Realiza la búsqueda A* para encontrar el camino
 print("Camino encontrado:", path)  # Imprime el camino encontrado por el agente
 
