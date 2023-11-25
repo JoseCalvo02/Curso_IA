@@ -4,7 +4,7 @@ from ant_colony import AntColony
 from visualizer import plot_graph, plot_results
 
 # Número de nodos en el grafo
-num_nodos = 6
+num_nodos = 10
 
 # Crea un grafo de ejemplo con nodos y aristas
 graph = nx.Graph()

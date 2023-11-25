@@ -29,6 +29,7 @@ class AntColony:
         """
         Ejecuta el algoritmo de Enfoque de Colonia de Hormigas.
         """
+        # El bucle for se repite n_iterations veces, luego termina.
         for _ in range(self.n_iterations):
             solutions = self._generate_solutions()  # Genera soluciones candidatas.
             self._update_pheromone(solutions)  # Actualiza la feromona en las aristas.
@@ -39,7 +40,6 @@ class AntColony:
                 self.best_path = best_solution[0]  # Actualiza la mejor ruta.
                 self.best_path_cost = best_solution[1]  # Actualiza el costo de la mejor ruta.
 
-        # El bucle for en run() se repite n_iterations veces, luego termina.
         # Devuelve la mejor ruta y su costo al final de todas las iteraciones.
         return self.best_path, self.best_path_cost
 
@@ -97,15 +97,15 @@ class AntColony:
 
         # Calcula la suma total de feromonas y visibilidad en las aristas vecinas.
         for neighbor in unvisited_neighbors:
-            pheromone = self.graph[current_node][neighbor]['pheromone']
+            pheromone = self.graph[current_node][neighbor]['pheromone'] # Obtiene el valor de feromona en la arista actual.
             visibility = 1 / self.graph[current_node][neighbor]['weight']  # Inversamente proporcional a la longitud de la arista.
-            total_pheromone += (pheromone ** self.alpha) * (visibility ** self.beta)
+            total_pheromone += (pheromone ** self.alpha) * (visibility ** self.beta) # Calcula la suma ponderada de feromonas y visibilidad.
 
         # Calcula las probabilidades de movimiento a los nodos vecinos.
         for neighbor in unvisited_neighbors:
-            pheromone = self.graph[current_node][neighbor]['pheromone']
-            visibility = 1 / self.graph[current_node][neighbor]['weight']
-            probability = ((pheromone ** self.alpha) * (visibility ** self.beta)) / total_pheromone
+            pheromone = self.graph[current_node][neighbor]['pheromone'] # Obtiene el valor de feromona en la arista actual.
+            visibility = 1 / self.graph[current_node][neighbor]['weight'] # Calcula la visibilidad (inversamente proporcional a la longitud de la arista).
+            probability = ((pheromone ** self.alpha) * (visibility ** self.beta)) / total_pheromone # Calcula la probabilidad utilizando la fórmula del algoritmo de colonia de hormigas.
             probabilities.append(probability)  # Agrega la probabilidad a la lista de probabilidades.
 
         return probabilities  # Devuelve la lista de probabilidades de movimiento a los vecinos no visitados.
