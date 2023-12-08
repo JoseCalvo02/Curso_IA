@@ -20,11 +20,11 @@ class MainWindow:
         screen_height = root.winfo_screenheight()
 
         # Calcular la posición para centrar la ventana
-        x_position = (screen_width - 600) // 2  # Ancho de la ventana principal
+        x_position = (screen_width - 700) // 2  # Ancho de la ventana principal
         y_position = (screen_height - 400) // 2  # Altura de la ventana principal
 
         # Establecer la posición de la ventana en el centro
-        self.root.geometry(f"600x400+{x_position}+{y_position}")
+        self.root.geometry(f"700x400+{x_position}+{y_position}")
 
         # Agregar un componente Listbox para mostrar la lista de películas
         self.movie_listbox = tk.Listbox(root, selectmode=tk.SINGLE, height=10, width=40)
@@ -109,7 +109,6 @@ class MainWindow:
         self.display_interactive_graph(clustered_data)
 
     def display_results(self, clustered_data, cluster_centers=None):
-        # Puedes personalizar esta función según tus necesidades
         # En este ejemplo, solo se muestra la información en la etiqueta de resultados
         result_text = f"Resultados del Clustering:\n{clustered_data[['Title', 'cluster']]}"
         self.result_label.config(text=result_text)
