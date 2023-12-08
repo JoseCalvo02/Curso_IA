@@ -4,10 +4,20 @@ import pandas as pd
 
 class KMeansClustering:
     def __init__(self, data_path):
+        # Leer los datos del archivo CSV y almacenarlos en el atributo 'data'
         self.data = pd.read_csv(data_path)
 
     def apply_kmeans(self, num_clusters):
-        # Selecciona solo las características relevantes (ajusta según tu conjunto de datos)
+        """
+        Aplica el algoritmo de K-medios a los datos de películas.
+
+        Args:
+        - num_clusters (int): Número de clústeres a formar.
+
+        Returns:
+        - Tuple: Conjunto de datos con asignación de clústeres y centros de clústeres.
+        """
+        # Selecciona solo las características relevantes
         features = self.data[['Rating', 'Year']]
 
         # Crea una instancia del modelo de K-medios y establece n_init explícitamente

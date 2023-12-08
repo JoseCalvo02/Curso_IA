@@ -1,12 +1,14 @@
-import sys
-sys.path.append("..")
+import sys # Importar el módulo sys para realizar ajustes en el sistema y manipular la ruta de búsqueda de módulos
+sys.path.append("..") # Agregar un directorio al sistema de rutas para permitir la importación de módulos desde un directorio superior
 
-import tkinter as tk
-import pandas as pd
+# Importar clases específicas desde módulos
 from clustering.kmeans_clustering import KMeansClustering
 from clustering.spectral_clustering import SpectralClusteringModel
-import plotly.express as px
-import plotly.graph_objects as go
+
+import tkinter as tk # Importar la biblioteca tkinter para construir interfaces gráficas
+import pandas as pd # Importar la biblioteca pandas para manipulación y análisis de datos
+import plotly.express as px # px proporciona una interfaz de alto nivel para la creación de gráficos
+import plotly.graph_objects as go # go proporciona una interfaz de bajo nivel para la creación de gráficos
 
 class MainWindow:
     def __init__(self, root):
@@ -61,6 +63,19 @@ class MainWindow:
             self.movie_listbox.insert(tk.END, movie_info)
 
     def apply_kmeans(self):
+        """
+        Aplica el algoritmo de K-medios al conjunto de datos de películas.
+
+        Crea una instancia de la clase KMeansClustering, que utiliza el algoritmo de K-medios
+        para agrupar películas basadas en sus características. Muestra los resultados y genera
+        un gráfico interactivo.
+
+        Args:
+        - num_clusters (int): Número de clústeres a formar.
+
+        Returns:
+        None
+        """
         kmeans_model = KMeansClustering('../../data/movies.csv')
         clustered_data, cluster_centers = kmeans_model.apply_kmeans(num_clusters=3)
 
@@ -71,6 +86,19 @@ class MainWindow:
         self.display_interactive_graph(clustered_data)
 
     def apply_spectral(self):
+        """
+        Aplica el algoritmo de Agrupamiento Espectral al conjunto de datos de películas.
+
+        Crea una instancia de la clase SpectralClusteringModel, que utiliza el algoritmo de
+        Agrupamiento Espectral para clasificar películas en clústeres. Muestra los resultados y
+        genera un gráfico interactivo.
+
+        Args:
+        - num_clusters (int): Número de clústeres a formar.
+
+        Returns:
+        None
+        """
         spectral_model = SpectralClusteringModel('../../data/movies.csv')
         clustered_data = spectral_model.apply_spectral_clustering(num_clusters=3)
 
@@ -112,8 +140,7 @@ class MainWindow:
         # Utilizar el método show() de Plotly para mostrar el gráfico
         plotly_fig.show()
 
-
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = MainWindow(root)
-    root.mainloop()
+    root = tk.Tk() # Crear una instancia de la clase Tk de tkinter, que representa la ventana principal de la interfaz gráfica
+    app = MainWindow(root) # Crear una instancia de la clase MainWindow, que define la estructura y comportamiento de la interfaz
+    root.mainloop() # Iniciar el bucle principal de la interfaz gráfica, que espera eventos del usuario
